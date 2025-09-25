@@ -9,7 +9,7 @@ Route::inertia('/dashboard', 'Dashboard')->middleware(['auth', 'verified'])->nam
 Route::inertia('/posts', 'Posts')->name('posts');
 Route::inertia('/users', 'Users')->name('users');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'auth:sanctum'])->group(function () {
     Route::post('/posts', [PostController::class, 'store']);
     Route::get('/all-posts', [PostController::class, 'get']);
     Route::delete('/post/{id}', [PostController::class, 'delete']);

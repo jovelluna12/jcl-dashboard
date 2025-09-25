@@ -29,6 +29,7 @@ class LoginRequest extends FormRequest
         return [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
+            'token_name' => 'nullable|string|max:255',
         ];
     }
 
@@ -90,5 +91,17 @@ class LoginRequest extends FormRequest
             ->append('|'.$this->ip())
             ->transliterate()
             ->value();
+    }
+
+    /**
+     * Authenticate this request
+     */
+    public function authenticate(): void
+    {
+        if (!Auth::attempt($this->only('email', 'password'))) {
+            throw ValidationException::withMessages([
+                'email' => ['The provided credentials are incorrect.'],
+            ]);
+        }
     }
 }
