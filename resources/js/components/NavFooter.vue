@@ -30,7 +30,14 @@ defineProps<Props>();
                     >
                         <a
                             :href="toUrl(item.href)"
-                            v-bind="item.openNextPage ? { target: '_blank', rel: 'noopener noreferrer' } : {}"
+                            v-bind="
+                                item.openNextPage
+                                    ? {
+                                          target: '_blank',
+                                          rel: 'noopener noreferrer',
+                                      }
+                                    : {}
+                            "
                         >
                             <component :is="item.icon" />
                             <span>{{ item.title }}</span>
