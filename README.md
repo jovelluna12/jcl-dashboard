@@ -22,8 +22,7 @@ A modular, headless Content Management System (CMS) built with **Laravel**, desi
 - **Backend**: Laravel 12+
 - **Database**: MySQL
 - **Authentication**: Laravel Sanctum
-- **Roles & Permissions**: Spatie Permission
-- **API Docs**: Swagger / Postman Collection
+- **API Docs**: [Postman Collection](https://jovelluna12-3893529.postman.co/workspace/Jovel-Christer-Luna's-Workspace~3c2c5987-9739-481f-8457-e6e9e4becf20/collection/48789645-42ddfe6b-ea36-45ed-8b74-9a30282d446f?action=share&creator=48789645)
 
 ---
 
@@ -34,7 +33,7 @@ A modular, headless Content Management System (CMS) built with **Laravel**, desi
 - PHP >= 8.2
 - Composer
 - Node.js & NPM
-- MySQL / PostgreSQL
+- MySQL
 - Laravel CLI
 
 ### Installation
