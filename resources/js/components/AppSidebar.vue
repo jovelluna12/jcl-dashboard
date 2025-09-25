@@ -42,18 +42,6 @@ const footerNavItems: NavItem[] = [
         icon: UserRound,
         openNextPage: false,
     },
-    {
-        title: 'Github Repo',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: Folder,
-        openNextPage: true,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
-        icon: BookOpen,
-        openNextPage: true,
-    },
 ];
 </script>
 
