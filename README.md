@@ -40,7 +40,7 @@ A modular, headless Content Management System (CMS) built with **Laravel**, desi
 
 ```bash
 # Clone the repo
-git clone https://github.com/yourusername/yourprojectname.git
+git clone https://github.com/jovelluna12/jcl-dashboard.git
 
 cd yourprojectname
 
