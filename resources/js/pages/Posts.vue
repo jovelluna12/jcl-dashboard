@@ -36,10 +36,12 @@ const posts = ref<Post[]>([]);
 // Modal control
 const showModal = ref(false);
 
-// New post form state
+// New / Edit post form state
 const newPostTitle = ref('');
 const newPostContent = ref('');
+const newPostVisibility = ref('public');
 const isLoading = ref(false); // <-- 🔄 Loading state
+const editingPostId = ref<number | null>(null);
 
 function openModal() {
     showModal.value = true;
@@ -49,7 +51,9 @@ function closeModal() {
     showModal.value = false;
     newPostTitle.value = '';
     newPostContent.value = '';
+    newPostVisibility.value = 'public';
     isLoading.value = false;
+    editingPostId.value = null;
 }
 
 async function fetchPosts() {
@@ -69,11 +73,21 @@ async function addPost() {
     isBusy.value = true;
 
     try {
-        await axios.post('/posts', {
-            title: newPostTitle.value,
-            content: newPostContent.value,
-            author: currentUser.value?.id,
-        });
+        if (editingPostId.value) {
+            await axios.put('/post/' + editingPostId.value, {
+                title: newPostTitle.value,
+                content: newPostContent.value,
+                author: currentUser.value?.id,
+                visibility: newPostVisibility.value,
+            });
+        } else {
+            await axios.post('/posts', {
+                title: newPostTitle.value,
+                content: newPostContent.value,
+                author: currentUser.value?.id,
+                visibility: newPostVisibility.value,
+            });
+        }
 
         await fetchPosts();
         closeModal();
@@ -90,6 +104,13 @@ async function addPost() {
     } finally {
         isBusy.value = false;
     }
+}
+
+function editPost(post: Post) {
+    editingPostId.value = post.id;
+    newPostTitle.value = post.title;
+    newPostContent.value = post.content;
+    showModal.value = true;
 }
 
 async function deletePost(id: number) {
@@ -121,8 +142,7 @@ onMounted(() => {
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div
-            class="flex h-full flex-1 flex-col gap-6 overflow-x-auto rounded-xl p-4"
-        >
+            class="flex h-full flex-1 flex-col gap-6 overflow-x-auto rounded-xl p-4">
             <!-- Posts List -->
             <div class="rounded-lg bg-white p-4 shadow">
                 <div class="mb-4 flex items-center justify-between">
@@ -140,16 +160,30 @@ onMounted(() => {
                     <div
                         v-for="post in posts"
                         :key="post.id"
-                        class="rounded-md border p-4"
-                    >
+                        class="rounded-md border p-4">
+
                         <div class="flex flex-row justify-between">
                             <h3 class="text-md font-bold">{{ post.title }}</h3>
-                            <button
-                                @click="deletePost(post.id)"
-                                class="ml-4 text-red-600 hover:text-red-800"
-                                aria-label="Delete post"
-                                title="Delete post"
-                            >
+                            <div class="flex items-center gap-2">
+                                <button
+                                    @click="editPost(post)"
+                                    class="ml-4 text-indigo-600 hover:text-indigo-800"
+                                    aria-label="Edit post"
+                                    title="Edit post"
+                                >
+                                    <!-- Simple edit/pencil icon -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M17.414 2.586a2 2 0 010 2.828L8.828 13H6v-2.828l8.586-8.586a2 2 0 012.828 0z" />
+                                        <path fill-rule="evenodd" d="M2 15a1 1 0 011-1h3.586l8.707-8.707a4 4 0 10-5.656-5.656L1 8.343V12a1 1 0 01-1 1v2a1 1 0 001 1h2a1 1 0 001-1v-2z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+
+                                <button
+                                    @click="deletePost(post.id)"
+                                    class="ml-4 text-red-600 hover:text-red-800"
+                                    aria-label="Delete post"
+                                    title="Delete post"
+                                >
                                 <!-- Simple trash icon SVG -->
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -169,6 +203,7 @@ onMounted(() => {
                         </div>
                         <p class="text-gray-700">{{ post.content }}</p>
                     </div>
+                    </div>
                 </div>
                 <div v-else class="text-gray-500">No posts available.</div>
             </div>
@@ -181,7 +216,7 @@ onMounted(() => {
         >
             <div class="mx-4 w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
                 <div class="mb-4 flex items-center justify-between">
-                    <h3 class="text-lg font-semibold">Add New Post</h3>
+                    <h3 class="text-lg font-semibold">{{ editingPostId ? 'Edit Post' : 'Add New Post' }}</h3>
                     <button
                         @click="closeModal"
                         class="text-xl text-gray-500 hover:text-gray-700"
@@ -192,10 +227,9 @@ onMounted(() => {
 
                 <form @submit.prevent="addPost" class="space-y-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700"
-                            >Title</label
-                        >
+                        <label for="post-title" class="block text-sm font-medium text-gray-700">Title</label>
                         <input
+                            id="post-title"
                             v-model="newPostTitle"
                             type="text"
                             class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
@@ -203,15 +237,25 @@ onMounted(() => {
                         />
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700"
-                            >Content</label
-                        >
+                        <label for="post-content" class="block text-sm font-medium text-gray-700">Content</label>
                         <textarea
+                            id="post-content"
                             v-model="newPostContent"
                             rows="4"
                             class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                             placeholder="Enter post content"
                         ></textarea>
+                    </div>
+                    <div>
+                        <label for="post-visibility" class="block text-sm font-medium text-gray-700">Visibility</label>
+                        <select
+                            id="post-visibility"
+                            v-model="newPostVisibility"
+                            class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        >
+                            <option value="public">Public</option>
+                            <option value="private">Private</option>
+                        </select>
                     </div>
                     <div class="flex justify-end gap-2">
                         <button

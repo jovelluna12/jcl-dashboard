@@ -11,8 +11,6 @@ A modular, headless Content Management System (CMS) built with **Laravel**, desi
 - 🔐 Authentication (Sanctum)
 - 🧑‍💼 Role & Permission Management
 - 📝 Post Management
-- ✍️ Contact Form Entries Monitoring with Spam Filtering Support
-- 📊 Dashboard Analytics
 - 🔗 API-first Architecture
 
 ---

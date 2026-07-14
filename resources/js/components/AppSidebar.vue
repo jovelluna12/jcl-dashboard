@@ -24,13 +24,8 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Post',
+        title: 'Posts',
         href: posts(),
-        icon: LayoutGrid,
-    },
-    {
-        title: 'Contact Form',
-        href: '#',
         icon: LayoutGrid,
     },
 ];

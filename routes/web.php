@@ -6,13 +6,14 @@ use App\Http\Controllers\PostController;
 
 Route::inertia('/', 'Welcome')->name('home');
 Route::inertia('/dashboard', 'Dashboard')->middleware(['auth', 'verified'])->name('dashboard');
-Route::inertia('/posts', 'Posts')->name('posts');
 Route::inertia('/users', 'Users')->name('users');
 
 Route::middleware('auth')->group(function () {
+    Route::inertia('/posts', 'Posts')->name('posts');
     Route::post('/posts', [PostController::class, 'store']);
-    Route::get('/all-posts', [PostController::class, 'get']);
-    Route::delete('/post/{id}', [PostController::class, 'delete']);
+    Route::get('/posts/{id}', [PostController::class, 'show']);
+    Route::put('/posts/{id}', [PostController::class, 'update']);
+    Route::delete('/posts/{id}', [PostController::class, 'destroy']);
 });
 
 require __DIR__.'/settings.php';

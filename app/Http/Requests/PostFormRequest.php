@@ -31,6 +31,11 @@ class PostFormRequest extends FormRequest
             ],
             'content' => 'required|string',
             'author' => 'required|exists:users,id',
+            'visibility' => [
+                'required',
+                'string',
+                Rule::in(['public', 'private']),
+            ],
         ];
     }
 }
