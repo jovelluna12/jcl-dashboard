@@ -12,6 +12,18 @@ A modular, headless Content Management System (CMS) built with **Laravel**, desi
 
 ---
 
+## 🖼️ Screenshots
+
+<div align="center">
+
+<h3>📊 Landing Page</h3>
+<img src="docs/screenshots/landing-page.bmp" width="900">
+
+<h3>📝 Post Management</h3>
+<img src="docs/screenshots/posts-management.bmp" width="900">
+
+</div>
+
 ## 📦 Tech Stack
 
 - **Backend**: Laravel 13+
