@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\PostController;
 
-Route::inertia('/', 'Welcome')->name('home');
+Route::inertia('/', 'auth/Login')->name('home');
 Route::inertia('/dashboard', 'Dashboard')->middleware(['auth', 'verified'])->name('dashboard');
 Route::inertia('/users', 'Users')->name('users');
 
