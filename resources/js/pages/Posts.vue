@@ -40,7 +40,7 @@ const showModal = ref(false);
 const newPostTitle = ref('');
 const newPostContent = ref('');
 const newPostVisibility = ref('public');
-const isLoading = ref(false); // <-- 🔄 Loading state
+const isLoading = ref(false);
 const editingPostId = ref<number | null>(null);
 
 function openModal() {
@@ -59,7 +59,7 @@ function closeModal() {
 async function fetchPosts() {
     try {
         const response = await axios.get<{ success: boolean; data: Post[] }>(
-            '/all-posts',
+            '/api/v1/posts?author=' + currentUser.value?.id,
         );
         posts.value = response.data.data;
     } catch (error) {
@@ -156,7 +156,7 @@ onMounted(() => {
                     </button>
                 </div>
 
-                <div v-if="posts.length > 0" class="space-y-4">
+                <div v-if="posts && posts.length > 0" class="space-y-4">
                     <div
                         v-for="post in posts"
                         :key="post.id"

@@ -2,14 +2,17 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\V1\Auth\LoginController;
-use App\Http\Controllers\Api\V1\PostController;
+use App\Http\Controllers\Api\V1\Auth\LoginController as V1LoginController;
+use App\Http\Controllers\Api\V1\PostController as V1PostController;
 
-Route::post('/login', [LoginController::class, 'login']);
-Route::get('/posts', [PostController::class, 'index']);
+Route::prefix('v1')->group(function () {
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/logout', [LoginController::class, 'logout']);
-    
-    // Add protected routes here
+    Route::post('/login', [V1LoginController::class, 'login']);
+
+    Route::get('/posts', [V1PostController::class, 'index']);
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('/logout', [V1LoginController::class, 'logout']);
+    });
+
 });
