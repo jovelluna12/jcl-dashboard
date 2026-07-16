@@ -21,7 +21,13 @@ class PostController extends Controller
 
     public function index(Request $request)
     {
-        $posts = $this->postService->getPublicPosts();
+
+        if ($request->has('author')) {
+            $authorId = $request->query('author');
+            $posts = $this->postService->getPublicPostsForUser($authorId);
+        } else {
+            $posts = $this->postService->getPublicPosts();
+        }
 
         return response()->json([
             'success' => true,
