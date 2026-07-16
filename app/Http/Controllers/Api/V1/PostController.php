@@ -35,4 +35,19 @@ class PostController extends Controller
         ]);
     }
 
+    public function retrievePost($id)
+    {
+
+        if (isset($id)) {
+            $posts = $this->postService->getPost($id);
+        } else {
+            throw new Exception('Post ID is required to retrieve a post.', 400);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $posts
+        ]);
+    }
+
 }

@@ -10,6 +10,7 @@ Route::prefix('v1')->group(function () {
     Route::post('/login', [V1LoginController::class, 'login']);
 
     Route::get('/posts', [V1PostController::class, 'index']);
+    Route::get('/post/{id}', [V1PostController::class, 'retrievePost']);
 
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', [V1LoginController::class, 'logout']);
