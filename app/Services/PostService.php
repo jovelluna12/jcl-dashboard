@@ -3,48 +3,85 @@
 namespace App\Services;
 
 use App\Models\Post;
+use Illuminate\Database\Eloquent\Collection;
 
 class PostService
 {
+    /**
+     * Create a new post.
+     */
     public function createPost(array $data): Post
     {
         return Post::create($data);
     }
 
-    public function getPublicPosts()
+    /**
+     * Get all public posts.
+     */
+    public function getPublicPosts(): Collection
     {
-        return Post::where('visibility', 'public')->get();
+        return Post::where('visibility', 'public')
+            ->get();
     }
 
-    public function getPrivatePostsForUser($userId)
+    /**
+     * Get public posts for a specific user.
+     */
+    public function getPublicPostsForUser($userId): Collection
     {
-        return Post::where('visibility', 'private')->where('author', $userId)->get();
+        return Post::where('visibility', 'public')
+            ->where('author', $userId)
+            ->get();
     }
 
-    public function getPublicPostsForUser($userId)
+    /**
+     * Get private posts for a specific user.
+     */
+    public function getPrivatePostsForUser($userId): Collection
     {
-        return Post::where('visibility', 'public')->where('author', $userId)->get();
+        return Post::where('visibility', 'private')
+            ->where('author', $userId)
+            ->get();
     }
 
-    public function getPostsForUser($userId)
+    /**
+     * Get all posts belonging to a user.
+     */
+    public function getPostsForUser($userId): Collection
     {
-        return Post::where('author', $userId)->get();
+        return Post::where('author', $userId)
+            ->get();
     }
 
-    public function getPost($id): ?Post
+    /**
+     * Get a single post.
+     *
+     * Throws ModelNotFoundException if missing.
+     */
+    public function getPost($id): Post
     {
-        return Post::find($id);
+        return Post::findOrFail($id);
     }
 
+    /**
+     * Update an existing post.
+     */
     public function updatePost(Post $post, array $data): Post
     {
         $post->update($data);
-        return $post;
+
+        return $post->refresh();
     }
 
+    /**
+     * Delete a post.
+     *
+     * Throws ModelNotFoundException if missing.
+     */
     public function deletePost($id): void
     {
-        Post::destroy($id);
+        $post = Post::findOrFail($id);
+
+        $post->delete();
     }
 }
-
