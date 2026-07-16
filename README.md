@@ -2,14 +2,11 @@
 
 A modular, headless Content Management System (CMS) built with **Laravel**, designed to manage content via an intuitive admin dashboard and expose it through a clean **RESTful API** for use across web, mobile, or other platforms.
 
-⚠️ **_This project is currently under active development._** Features may change frequently. Contributions and feedback are welcome!
-
 ---
 
 ## 🧱 Features
 
 - 🔐 Authentication (Sanctum)
-- 🧑‍💼 Role & Permission Management
 - 📝 Post Management
 - 🔗 API-first Architecture
 
@@ -17,7 +14,7 @@ A modular, headless Content Management System (CMS) built with **Laravel**, desi
 
 ## 📦 Tech Stack
 
-- **Backend**: Laravel 12+
+- **Backend**: Laravel 13+
 - **Database**: MySQL
 - **Authentication**: Laravel Sanctum
 - **API Docs**: [Postman Collection](https://jovelluna12-3893529.postman.co/workspace/Jovel-Christer-Luna's-Workspace~3c2c5987-9739-481f-8457-e6e9e4becf20/collection/48789645-42ddfe6b-ea36-45ed-8b74-9a30282d446f?action=share&creator=48789645)

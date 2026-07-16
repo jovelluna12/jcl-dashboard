@@ -12,5 +12,21 @@ use App\Http\Requests\PostFormRequest;
 class PostController extends Controller
 {
 
+    protected $postService;
+
+    public function __construct(private PostService $post)
+    {
+        $this->postService = $post;
+    }
+
+    public function index(Request $request)
+    {
+        $posts = $this->postService->getPublicPosts();
+
+        return response()->json([
+            'success' => true,
+            'data' => $posts
+        ]);
+    }
 
 }
