@@ -141,85 +141,112 @@ onMounted(() => {
     <Head title="Posts" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div
-            class="flex h-full flex-1 flex-col gap-6 overflow-x-auto rounded-xl p-4">
-            <!-- Posts List -->
-            <div class="rounded-lg bg-white p-4 shadow">
-                <div class="mb-4 flex items-center justify-between">
-                    <h2 class="text-lg font-semibold">Posts</h2>
-                    <button
-                        type="button"
-                        @click="openModal"
-                        class="rounded-md bg-indigo-600 px-3 py-1.5 text-sm text-white hover:bg-indigo-700"
-                    >
-                        Add Post
-                    </button>
+        <div class="flex h-full flex-1 flex-col gap-6 overflow-x-auto rounded-xl p-4">
+            <!-- Posts Header -->
+            <div class="flex flex-col gap-3 rounded-lg bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                    <h2 class="text-lg font-semibold text-gray-900">Posts</h2>
+                    <p class="mt-1 text-sm text-gray-500">
+                        Create, edit, and manage your posts.
+                    </p>
                 </div>
 
-                <div v-if="posts && posts.length > 0" class="space-y-4">
+                <button
+                    type="button"
+                    @click="openModal"
+                    class="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                >
+                    Add Post
+                </button>
+            </div>
+
+            <!-- Posts List -->
+            <div class="rounded-lg bg-white p-4 shadow">
+                <div v-if="posts && posts.length > 0" class="space-y-3">
                     <div
                         v-for="post in posts"
                         :key="post.id"
-                        class="rounded-md border p-4">
+                        class="group flex flex-col gap-3 rounded-md border border-gray-200 p-4 transition hover:bg-gray-50"
+                    >
+                        <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                            <div class="min-w-0">
+                                <h3 class="truncate text-base font-bold text-gray-900">
+                                    {{ post.title }}
+                                </h3>
+                            </div>
 
-                        <div class="flex flex-row justify-between">
-                            <h3 class="text-md font-bold">{{ post.title }}</h3>
                             <div class="flex items-center gap-2">
                                 <button
                                     @click="editPost(post)"
-                                    class="ml-4 text-indigo-600 hover:text-indigo-800"
+                                    class="rounded-md p-1.5 text-indigo-600 hover:bg-indigo-50 hover:text-indigo-800"
                                     aria-label="Edit post"
                                     title="Edit post"
                                 >
-                                    <!-- Simple edit/pencil icon -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-5 w-5"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                    >
                                         <path d="M17.414 2.586a2 2 0 010 2.828L8.828 13H6v-2.828l8.586-8.586a2 2 0 012.828 0z" />
-                                        <path fill-rule="evenodd" d="M2 15a1 1 0 011-1h3.586l8.707-8.707a4 4 0 10-5.656-5.656L1 8.343V12a1 1 0 01-1 1v2a1 1 0 001 1h2a1 1 0 001-1v-2z" clip-rule="evenodd" />
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M2 15a1 1 0 011-1h3.586l8.707-8.707a4 4 0 10-5.656-5.656L1 8.343V12a1 1 0 01-1 1v2a1 1 0 001 1h2a1 1 0 001-1v-2z"
+                                            clip-rule="evenodd"
+                                        />
                                     </svg>
                                 </button>
 
                                 <button
                                     @click="deletePost(post.id)"
-                                    class="ml-4 text-red-600 hover:text-red-800"
+                                    class="rounded-md p-1.5 text-red-600 hover:bg-red-50 hover:text-red-800"
                                     aria-label="Delete post"
                                     title="Delete post"
                                 >
-                                <!-- Simple trash icon SVG -->
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-5 w-5"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4m-4 0a1 1 0 00-1 1v1h6V4a1 1 0 00-1-1m-4 0h4"
-                                    />
-                                </svg>
-                            </button>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-5 w-5"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4m-4 0a1 1 0 00-1 1v1h6V4a1 1 0 00-1-1m-4 0h4"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
-                        <p class="text-gray-700">{{ post.content }}</p>
-                    </div>
+
+                        <p class="text-sm leading-relaxed text-gray-700">
+                            {{ post.content }}
+                        </p>
                     </div>
                 </div>
-                <div v-else class="text-gray-500">No posts available.</div>
+
+                <div v-else class="rounded-md border border-dashed border-gray-200 p-6 text-center text-sm text-gray-500">
+                    No posts available.
+                </div>
             </div>
         </div>
 
         <!-- Modal -->
         <div
             v-if="showModal"
-            class="fixed inset-0 z-50 flex items-center justify-center bg-gray-700/50"
+            class="fixed inset-0 z-50 flex items-center justify-center bg-gray-700/50 p-4"
         >
-            <div class="mx-4 w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+            <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
                 <div class="mb-4 flex items-center justify-between">
-                    <h3 class="text-lg font-semibold">{{ editingPostId ? 'Edit Post' : 'Add New Post' }}</h3>
+                    <h3 class="text-lg font-semibold text-gray-900">
+                        {{ editingPostId ? 'Edit Post' : 'Add New Post' }}
+                    </h3>
                     <button
                         @click="closeModal"
-                        class="text-xl text-gray-500 hover:text-gray-700"
+                        class="text-2xl leading-none text-gray-500 hover:text-gray-700"
+                        aria-label="Close modal"
                     >
                         &times;
                     </button>
@@ -232,46 +259,49 @@ onMounted(() => {
                             id="post-title"
                             v-model="newPostTitle"
                             type="text"
-                            class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            class="mt-1 block w-full p-[12px] rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                             placeholder="Enter post title"
                         />
                     </div>
+
                     <div>
                         <label for="post-content" class="block text-sm font-medium text-gray-700">Content</label>
                         <textarea
                             id="post-content"
                             v-model="newPostContent"
                             rows="4"
-                            class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            class="mt-1 block w-full p-[12px] rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                             placeholder="Enter post content"
                         ></textarea>
                     </div>
+
                     <div>
                         <label for="post-visibility" class="block text-sm font-medium text-gray-700">Visibility</label>
                         <select
                             id="post-visibility"
                             v-model="newPostVisibility"
-                            class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            class="mt-1 block w-full p-[12px] rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                         >
                             <option value="public">Public</option>
                             <option value="private">Private</option>
                         </select>
                     </div>
+
                     <div class="flex justify-end gap-2">
                         <button
                             type="button"
                             @click="closeModal"
-                            class="rounded-md bg-gray-200 px-4 py-2 text-sm hover:bg-gray-300"
+                            class="rounded-md bg-gray-200 px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-300"
                         >
                             Cancel
                         </button>
+
                         <button
                             type="submit"
-                            :disabled="isLoading"
-                            class="rounded-md bg-indigo-600 px-4 py-2 text-sm text-white hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+                            :disabled="isBusy"
+                            class="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
                         >
-                            <span v-if="isLoading">Saving...</span>
-                            <span v-else>Save</span>
+                            {{ isBusy ? 'Saving...' : 'Save' }}
                         </button>
                     </div>
                 </form>
@@ -281,7 +311,7 @@ onMounted(() => {
         <!-- Full screen loading overlay -->
         <div
             v-if="isBusy"
-            class="fixed inset-0 z-[100] flex items-center justify-center bg-black opacity-[0.9]"
+            class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60"
         >
             <svg
                 class="h-12 w-12 animate-spin text-white"
@@ -306,3 +336,4 @@ onMounted(() => {
         </div>
     </AppLayout>
 </template>
+
