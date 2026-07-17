@@ -24,7 +24,7 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Posts',
+        title: 'Post Management',
         href: posts(),
         icon: LayoutGrid,
     },

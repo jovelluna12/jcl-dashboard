@@ -26,7 +26,7 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: dashboard().url,
     },
     {
-        title: 'Posts',
+        title: 'Post Management',
         href: '#',
     },
 ];
@@ -138,14 +138,14 @@ onMounted(() => {
 </script>
 
 <template>
-    <Head title="Posts" />
+    <Head title="Post Management" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="flex h-full flex-1 flex-col gap-6 overflow-x-auto rounded-xl p-4">
             <!-- Posts Header -->
             <div class="flex flex-col gap-3 rounded-lg bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                    <h2 class="text-lg font-semibold text-gray-900">Posts</h2>
+                    <h2 class="text-lg font-semibold text-gray-900">Post Management</h2>
                     <p class="mt-1 text-sm text-gray-500">
                         Create, edit, and manage your posts.
                     </p>
