@@ -5,16 +5,16 @@ namespace Database\Seeders;
 use App\Models\UserRole;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class UserRoleSeeder extends Seeder
 {
+
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
-        $this->call([
-            UserRoleSeeder::class,
-            UserSeeder::class,
-        ]);
+        UserRole::create(['name' => 'Administrator']);
+        UserRole::create(['name' => 'Editor']);
+        UserRole::create(['name' => 'Author']);
     }
 }
