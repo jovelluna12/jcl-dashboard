@@ -13,7 +13,7 @@ class UserService
 
     public function getUsers()
     {
-        return User::all();
+        return User::with('role')->get();
     }
 
     public function getUserById($id)

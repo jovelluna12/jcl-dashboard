@@ -20,7 +20,7 @@ interface User {
     id: number;
     name: string;
     email: string;
-    role: string;
+    role: any;
 }
 
 const page = usePage();
@@ -76,7 +76,7 @@ const users = computed(() => page.props.users as User[]);
                         </td>
 
                         <td class="border border-gray-300 px-4 py-2">
-                            {{ user.role }}
+                            {{ user.role.name }}
                         </td>
 
                         <td class="border border-gray-300 px-4 py-2">
