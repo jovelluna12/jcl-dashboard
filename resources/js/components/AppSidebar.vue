@@ -32,7 +32,7 @@ const mainNavItems: NavItem[] = [
 
 const footerNavItems: NavItem[] = [
     {
-        title: 'Users',
+        title: 'User Management',
         href: '/users',
         icon: UserRound,
         openNextPage: false,
