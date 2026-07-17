@@ -6,9 +6,10 @@ A modular, headless Content Management System (CMS) built with **Laravel**, desi
 
 ## 🧱 Features
 
-- 🔐 Authentication (Sanctum)
-- 📝 Post Management
-- 🔗 API-first Architecture
+- Sanctum Authentication
+- Post Management
+- User Management
+- API-first Architecture
 
 ---
 
