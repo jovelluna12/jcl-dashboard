@@ -18,6 +18,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth', 'role:Administrator')->group(function () {
     Route::get('/users', [UserManagementController::class, 'index']);
+    Route::delete('/users/{id}', [UserManagementController::class, 'destroy']);
 });
 
 require __DIR__.'/settings.php';

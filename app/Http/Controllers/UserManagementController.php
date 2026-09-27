@@ -22,4 +22,13 @@ class UserManagementController extends Controller
         return Inertia::render('Users', ['users' => $users]);
     }
 
+
+    public function destroy($id)
+    {
+        $this->userService->deleteUser($id);
+
+        $users = $this->userService->getUsers();
+        return Inertia::render('Users', ['users' => $users]);
+    }
+
 }
