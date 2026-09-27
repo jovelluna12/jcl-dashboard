@@ -141,15 +141,18 @@ onMounted(() => {
     <Head title="Post Management" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-        <div class="flex h-full flex-1 flex-col gap-6 overflow-x-auto rounded-xl p-4">
+        <div class="flex h-full flex-1 flex-col gap-6 overflow-x-auto rounded-xl bg-white p-4 dark:bg-gray-900">
+
             <!-- Posts Header -->
-            <div class="flex flex-col gap-3 rounded-lg bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+
+            <div class="flex flex-col gap-3 rounded-lg bg-white p-4 shadow-sm dark:bg-gray-900 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                    <h2 class="text-lg font-semibold text-gray-900">Post Management</h2>
-                    <p class="mt-1 text-sm text-gray-500">
+                    <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Post Management</h2>
+                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300">
                         Create, edit, and manage your posts.
                     </p>
                 </div>
+
 
                 <button
                     type="button"
@@ -161,27 +164,30 @@ onMounted(() => {
             </div>
 
             <!-- Posts List -->
-            <div class="rounded-lg bg-white p-4 shadow">
+            <div class="rounded-lg bg-white p-4 shadow dark:bg-gray-900">
                 <div v-if="posts && posts.length > 0" class="space-y-3">
                     <div
                         v-for="post in posts"
                         :key="post.id"
-                        class="group flex flex-col gap-3 rounded-md border border-gray-200 p-4 transition hover:bg-gray-50"
+                        class="group flex flex-col gap-3 rounded-md border border-gray-200 p-4 transition hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-800"
                     >
+
                         <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                             <div class="min-w-0">
-                                <h3 class="truncate text-base font-bold text-gray-900">
+                                <h3 class="truncate text-base font-bold text-gray-900 dark:text-gray-100">
                                     {{ post.title }}
                                 </h3>
+
                             </div>
 
                             <div class="flex items-center gap-2">
                                 <button
                                     @click="editPost(post)"
-                                    class="rounded-md p-1.5 text-indigo-600 hover:bg-indigo-50 hover:text-indigo-800"
+                                    class="rounded-md p-1.5 text-indigo-600 hover:bg-indigo-50 hover:text-indigo-800 dark:hover:bg-indigo-900/40"
                                     aria-label="Edit post"
                                     title="Edit post"
                                 >
+
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         class="h-5 w-5"
@@ -199,10 +205,11 @@ onMounted(() => {
 
                                 <button
                                     @click="deletePost(post.id)"
-                                    class="rounded-md p-1.5 text-red-600 hover:bg-red-50 hover:text-red-800"
+                                    class="rounded-md p-1.5 text-red-600 hover:bg-red-50 hover:text-red-800 dark:hover:bg-red-900/30"
                                     aria-label="Delete post"
                                     title="Delete post"
                                 >
+
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         class="h-5 w-5"
@@ -221,15 +228,17 @@ onMounted(() => {
                             </div>
                         </div>
 
-                        <p class="text-sm leading-relaxed text-gray-700">
+                        <p class="text-sm leading-relaxed text-gray-700 dark:text-gray-300">
                             {{ post.content }}
                         </p>
+
                     </div>
                 </div>
 
-                <div v-else class="rounded-md border border-dashed border-gray-200 p-6 text-center text-sm text-gray-500">
+                <div v-else class="rounded-md border border-dashed border-gray-200 p-6 text-center text-sm text-gray-500 dark:border-gray-700 dark:text-gray-400">
                     No posts available.
                 </div>
+
             </div>
         </div>
 
@@ -238,11 +247,13 @@ onMounted(() => {
             v-if="showModal"
             class="fixed inset-0 z-50 flex items-center justify-center bg-gray-700/50 p-4"
         >
-            <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+
+            <div class="w-full max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-gray-900">
                 <div class="mb-4 flex items-center justify-between">
-                    <h3 class="text-lg font-semibold text-gray-900">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
                         {{ editingPostId ? 'Edit Post' : 'Add New Post' }}
                     </h3>
+
                     <button
                         @click="closeModal"
                         class="text-2xl leading-none text-gray-500 hover:text-gray-700"
@@ -254,33 +265,42 @@ onMounted(() => {
 
                 <form @submit.prevent="addPost" class="space-y-4">
                     <div>
-                        <label for="post-title" class="block text-sm font-medium text-gray-700">Title</label>
+                        <label for="post-title" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Title</label>
+
                         <input
                             id="post-title"
+
                             v-model="newPostTitle"
                             type="text"
-                            class="mt-1 block w-full p-[12px] rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                            placeholder="Enter post title"
+                            class="mt-1 block w-full p-[12px] rounded-md border border-gray-300 shadow-sm bg-white dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600 focus:border-indigo-500 focus:ring-indigo-500" placeholder="Enter post title"
+
                         />
                     </div>
 
                     <div>
-                        <label for="post-content" class="block text-sm font-medium text-gray-700">Content</label>
+                        <label for="post-content" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Content</label>
+
                         <textarea
                             id="post-content"
+
                             v-model="newPostContent"
                             rows="4"
-                            class="mt-1 block w-full p-[12px] rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            class="mt-1 block w-full p-[12px] rounded-md border border-gray-300 shadow-sm bg-white dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600 focus:border-indigo-500 focus:ring-indigo-500"
                             placeholder="Enter post content"
                         ></textarea>
+
                     </div>
 
                     <div>
-                        <label for="post-visibility" class="block text-sm font-medium text-gray-700">Visibility</label>
+                        <label for="post-visibility" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Visibility</label>
+
                         <select
+
                             id="post-visibility"
+
                             v-model="newPostVisibility"
-                            class="mt-1 block w-full p-[12px] rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                            class="mt-1 block w-full p-[12px] rounded-md border border-gray-300 shadow-sm bg-white dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600 focus:border-indigo-500 focus:ring-indigo-500"
+
                         >
                             <option value="public">Public</option>
                             <option value="private">Private</option>
@@ -291,7 +311,8 @@ onMounted(() => {
                         <button
                             type="button"
                             @click="closeModal"
-                            class="rounded-md bg-gray-200 px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-300"
+                            class="rounded-md bg-gray-200 px-4 py-2 text-sm font-medium text-gray-800 hover:bg-gray-300 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700"
+
                         >
                             Cancel
                         </button>
@@ -300,6 +321,7 @@ onMounted(() => {
                             type="submit"
                             :disabled="isBusy"
                             class="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:cursor-not-allowed disabled:opacity-50"
+
                         >
                             {{ isBusy ? 'Saving...' : 'Save' }}
                         </button>
@@ -309,6 +331,7 @@ onMounted(() => {
         </div>
 
         <!-- Full screen loading overlay -->
+
         <div
             v-if="isBusy"
             class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60"

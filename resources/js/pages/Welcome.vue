@@ -38,9 +38,11 @@ const techStack = [
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
     </Head>
 
-    <div class="min-h-screen bg-white text-slate-900">
+    <div class="min-h-screen bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-50">
+
         <!-- Header -->
-        <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
+        <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur dark:border-slate-800 dark:bg-slate-950/70">
+
             <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
                 <div class="flex items-center gap-3">
                     <div
@@ -51,7 +53,8 @@ const techStack = [
 
                     <div>
                         <h1 class="text-lg font-bold">JCL Dashboard</h1>
-                        <p class="text-xs text-slate-500">Laravel Headless CMS</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Laravel Headless CMS</p>
+
                     </div>
                 </div>
 
@@ -67,7 +70,8 @@ const techStack = [
                     <template v-else>
                         <Link
                             :href="login()"
-                            class="rounded-lg px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100"
+                            class="rounded-lg px-4 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+
                         >
                             Login
                         </Link>
@@ -131,7 +135,8 @@ const techStack = [
 
                             <Link
                                 :href="login()"
-                                class="rounded-xl border border-slate-300 bg-white px-8 py-4 font-semibold text-slate-700 transition hover:bg-slate-50"
+                            class="rounded-xl border border-slate-300 bg-white px-8 py-4 font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+
                             >
                                 Login
                             </Link>
@@ -141,25 +146,29 @@ const techStack = [
             </section>
 
             <!-- Features -->
-            <section class="border-y border-slate-200 bg-slate-50 py-20">
+            <section class="border-y border-slate-200 bg-slate-50 py-20 dark:border-slate-800 dark:bg-slate-900">
+
                 <div class="mx-auto max-w-7xl px-6">
                     <div class="text-center">
-                        <h3 class="text-3xl font-bold text-slate-900">
+                        <h3 class="text-3xl font-bold text-slate-900 dark:text-slate-100">
                             Everything You Need
                         </h3>
 
-                        <p class="mt-3 text-slate-600">
+
+                        <p class="mt-3 text-slate-600 dark:text-slate-300">
                             Built for developers who want a clean and scalable
                             content management solution.
                         </p>
+
                     </div>
 
                     <div class="mt-12 grid gap-6 md:grid-cols-3">
                         <div
                             v-for="feature in features"
                             :key="feature.title"
-                            class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
+                            class="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-800 dark:bg-slate-950"
                         >
+
                             <div class="text-4xl">
                                 {{ feature.icon }}
                             </div>
@@ -168,9 +177,10 @@ const techStack = [
                                 {{ feature.title }}
                             </h4>
 
-                            <p class="mt-3 leading-7 text-slate-600">
+                            <p class="mt-3 leading-7 text-slate-600 dark:text-slate-300">
                                 {{ feature.description }}
                             </p>
+
                         </div>
                     </div>
                 </div>
@@ -180,15 +190,18 @@ const techStack = [
             <section class="py-20">
                 <div class="mx-auto max-w-7xl px-6">
                     <div
-                        class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm"
+                        class="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-950"
+
                     >
                         <div class="grid lg:grid-cols-2">
                             <div class="p-10 lg:p-14">
-                                <h3 class="text-3xl font-bold">
+                                <h3 class="text-3xl font-bold dark:text-slate-100">
                                     Built with Modern Technologies
                                 </h3>
 
-                                <p class="mt-4 leading-8 text-slate-600">
+
+                                <p class="mt-4 leading-8 text-slate-600 dark:text-slate-300">
+
                                     JCL Dashboard follows an API-first architecture
                                     powered by Laravel, making it easy
                                     to integrate with web, mobile, or any
@@ -199,8 +212,9 @@ const techStack = [
                                     <span
                                         v-for="tech in techStack"
                                         :key="tech"
-                                        class="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700"
+                                        class="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200"
                                     >
+
                                         {{ tech }}
                                     </span>
                                 </div>
@@ -210,7 +224,8 @@ const techStack = [
                                 class="flex items-center justify-center bg-gradient-to-br from-indigo-50 to-white p-10"
                             >
                                 <div
-                                    class="w-full max-w-sm rounded-2xl border border-slate-200 bg-white p-8 shadow-lg"
+                                    class="w-full max-w-sm rounded-2xl border border-slate-200 bg-white p-8 shadow-lg dark:border-slate-800 dark:bg-slate-950"
+
                                 >
                                     <div
                                         class="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-indigo-600 text-2xl text-white"
@@ -218,12 +233,14 @@ const techStack = [
                                         🚀
                                     </div>
 
-                                    <h4 class="text-xl font-bold">
+                                    <h4 class="text-xl font-bold dark:text-slate-100">
                                         API-first Development
                                     </h4>
 
-                                    <p class="mt-3 text-slate-600">
+
+                                    <p class="mt-3 text-slate-600 dark:text-slate-300">
                                         Manage content from one place while serving
+
                                         multiple frontend applications with a clean
                                         RESTful API.
                                     </p>
